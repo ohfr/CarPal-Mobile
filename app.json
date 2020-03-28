@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Blank Template",
+    "slug": "mobile",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.carpal.expo.googlesignin",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.630272562858-oa0gd1ppsv31dl24281svn0k5rul2gg3"
+        }
+      }
+    },
+    "android": {
+      "package":"com.carpal.expo.googlesignin",
+      "googleServicesFile": "./google-services.json"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "630272562858",
+    "firebase_url": "https://carpal-ef0c0.firebaseio.com",
+    "project_id": "carpal-ef0c0",
+    "storage_bucket": "carpal-ef0c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630272562858:android:c8d9a5a078c462e02aa2d3",
+        "android_client_info": {
+          "package_name": "com.carpal.expo.googlesignin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630272562858-7ar1ajlhro58amd9d5b2sv0ldh025csh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7VyWVm0Iq4fbkxYyUkP7GpMSRYuAQJTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630272562858-7ar1ajlhro58amd9d5b2sv0ldh025csh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "630272562858-oa0gd1ppsv31dl24281svn0k5rul2gg3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.carpal.expo.googlesignin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
