@@ -8,14 +8,43 @@ import {
   TouchableOpacity,
   Dimensions
 } from "react-native";
-import * as GoogleSignIn from "expo-google-sign-in";
+import * as GoogleSignIn from "expo-google-app-auth";
+import config from '../../config';
+import { connect } from 'react-redux';
+import { getToken, setToken } from '../../Utils/token';
 
 const Login = props => {
   const [user, setUser] = useState();
-  useEffect(() => {
-    initAsync();
-  }, []);
+  useEffect(async () => {
+    if (user) {
+      // should save user to DB similar to passport
+      // props.history.push("/profile");
+      await setToken(user.id)
+      let token = await getToken()
+      console.log(token)
+    }
+  }, [user]);
 
+  //for use with expo client
+  const signInWithGoogle = async () => {
+    try {
+      const result = await GoogleSignIn.logInAsync({
+        iosClientId: config.iosClientId,
+        androidClientId: config.androidClientId,
+        scopes: ['profile', 'email']
+      });
+      if (result.type === 'success') {
+        setUser(result.user);
+      } else {
+        return { canceled: true }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
+
+  //for use with standalone app
   const initAsync = async () => {
     await GoogleSignIn.initAsync();
     syncUserWithStateAsync();
@@ -25,7 +54,6 @@ const Login = props => {
     const signedInUser = await GoogleSignIn.signInSilentlyAsync();
     if (signedInUser) {
       setUser(signedInUser);
-      console.log(user);
     }
   };
 
@@ -75,7 +103,7 @@ const Login = props => {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText} onPress={handlePress}>
+        <Text style={styles.buttonText} onPress={signInWithGoogle}>
           Login With Google
         </Text>
       </TouchableOpacity>
@@ -140,4 +168,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+export default connect()(Login);

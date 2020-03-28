@@ -13,5 +13,8 @@ web-report/
 # macOS
 .DS_Store
 
-
+.env
 node_modules
+
+# ignore service files for now
+google-services.json
