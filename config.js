@@ -1,6 +1,5 @@
-import {iosClientId, androidClientId } from 'react-native-dotenv';
+import {CLIENT_ID } from 'react-native-dotenv';
 
 export default {
-    iosClientId,
-    androidClientId
+    CLIENT_ID
 }

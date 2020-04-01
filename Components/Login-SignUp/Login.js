@@ -6,19 +6,24 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  KeyboardAvoidingView
 } from "react-native";
 // import * as GoogleSignIn from "expo-google-sign-in";
-import config from '../../config';
-import { connect } from 'react-redux';
-import { getToken, setToken } from '../../Utils/token';
-import api from '../../Utils/api';
-import { GoogleSignin, statusCodes, GoogleSigninButton } from '@react-native-community/google-signin';
+import config from "../../config";
+import { connect } from "react-redux";
+import { getToken, setToken } from "../../Utils/token";
+import api from "../../Utils/api";
+import {
+  GoogleSignin,
+  statusCodes,
+  GoogleSigninButton
+} from "@react-native-community/google-signin";
 
 const Login = props => {
   const [user, setUser] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   });
 
   const [googleUser, setGoogleUser] = useState();
@@ -34,13 +39,13 @@ const Login = props => {
     // } else {
     //   initAsync();
     // }
-      // try {
-      //   initAsync();
-      // } catch (err) {
-      //   console.log(err)
-      // }
-      GoogleSignin.configure();
-      getCurrentUser();
+    // try {
+    //   initAsync();
+    // } catch (err) {
+    //   console.log(err)
+    // }
+    GoogleSignin.configure();
+    getCurrentUser();
     console.log(user);
   }, [user]);
 
@@ -117,24 +122,24 @@ const Login = props => {
     setUser({
       ...user,
       [name]: text
-    })
-  }
+    });
+  };
 
-
-  const handleLogin = (e) => {
-    api().post("/auth/login", user)
+  const handleLogin = e => {
+    api()
+      .post("/auth/login", user)
       .then(res => {
         console.log(res);
       })
-      .catch(err => console.log(err))
-  }
+      .catch(err => console.log(err));
+  };
 
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       setGoogleUser(userInfo);
-    }catch(err) {
+    } catch (err) {
       console.log(err);
       if (err.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log("user canceled");
@@ -146,7 +151,7 @@ const Login = props => {
         console.log("other");
       }
     }
-  }
+  };
 
   const [loggedIn, setLoggedIn] = useState();
 
@@ -154,52 +159,54 @@ const Login = props => {
     try {
       const userInfo = await GoogleSignin.signInSilently();
       setGoogleUser(userInfo);
-    } catch(err) {
+    } catch (err) {
       if (err.code === statusCodes.SIGN_IN_REQUIRED) {
         console.log("not signed in");
       } else {
-        console.log('something else')
+        console.log("something else");
       }
     }
-  }
+  };
 
   const isUserSignedIn = async () => {
     const isSignedIn = await GoogleSignin.isSignedIn();
     setLoggedIn(isSignedIn);
-  }
+  };
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.inputs}
-        placeholder="Email"
-        keyboardType="email-address"
-        textContentType="emailAddress"
-        placeholderTextColor="#F3f4f4"
-        autoFocus={true}
-        onChangeText={text => handleInput("email", text)}
-      />
-      <TextInput
-        style={styles.inputs}
-        placeholder="Password"
-        textContentType="password"
-        secureTextEntry={true}
-        placeholderTextColor="#F3f4f4"
-        onChangeText={text => handleInput("password", text)}
-      />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText} onPress={handleLogin}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>
-          Login With Google
-        </Text>
-      </TouchableOpacity>
-      <Text style={styles.text}>Don't have an account?</Text>
-      <Link to="/signup">
-        <Text style={styles.linkText}>Sign Up!</Text>
-      </Link>
-      <GoogleSigninButton onPress={signIn} />
+      <KeyboardAvoidingView>
+        <TextInput
+          style={styles.inputs}
+          placeholder="Email"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          placeholderTextColor="#F3f4f4"
+          autoFocus={true}
+          onChangeText={text => handleInput("email", text)}
+        />
+        <TextInput
+          style={styles.inputs}
+          placeholder="Password"
+          textContentType="password"
+          secureTextEntry={true}
+          placeholderTextColor="#F3f4f4"
+          onChangeText={text => handleInput("password", text)}
+        />
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText} onPress={handleLogin}>
+            Login
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Login With Google</Text>
+        </TouchableOpacity>
+        <Text style={styles.text}>Don't have an account?</Text>
+        <Link to="/signup">
+          <Text style={styles.linkText}>Sign Up!</Text>
+        </Link>
+        <GoogleSigninButton onPress={signIn} />
+      </KeyboardAvoidingView>
     </View>
   );
 };

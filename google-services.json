@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "630272562858-7rj0ch8vmb2jhlnqecl79cmm051i5sen.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.carpal.expo.googlesignin",
+            "certificate_hash": "df40d54652e46bb3ea069b9d53a0a315143aff37"
+          }
+        },
+        {
           "client_id": "630272562858-7ar1ajlhro58amd9d5b2sv0ldh025csh.apps.googleusercontent.com",
           "client_type": 3
         }
